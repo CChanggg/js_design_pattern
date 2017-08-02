@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>单例模式</title>
+</head>
+<style>
+  .loginLayer {
+    width: 200px;
+    height: 200px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+
+<body>
+  <div>
+    <button id="loginBtn">登录</button>
+    <!-- 定义：保证一个类只有一个实例，并提供一个访问它的全局访问点。
+    window 对象 -->
+  </div>
+  <script>
+    var loginLayer = (function() {
+      var div = document.createElement('div');
+      div.className = 'loginLayer';
+      div.innerHTML = '我是登录窗口';
+      div.style.display = 'none';
+      document.body.appendChild(div);
+      return div;
+    })()
+    var creatLoginLayer = (function() {
+      var div;
+      return function() {
+        if (!div) {
+          div = document.createElement('div');
+          div.className = 'loginLayer';
+          div.innerHTML = '我是登录窗口';
+          div.style.display = 'none';
+          document.body.appendChild(div);
+        }
+        return div;
+      }
+    })()
+    document.getElementById('loginBtn').addEventListener('click', function() {
+      var loginLayer = creatLoginLayer();
+      loginLayer.style.display = 'block';
+    }, false)
+    //   var Singleton = function(name) {
+    //     this.name = name;
+    //     this.instance = null;
+    //   }
+    //   Singleton.prototype.getName = function() {
+    //     alert(this.name);
+    //   }
+    //   // static 静态方法 服务于类 而不是对象
+    //   Singleton.getInstance = function(name) {
+    //     if (!this.instance) {
+    //       this.instance = new Singleton(name);
+    //     }
+    //     return this.instance;
+    //   }
+    //   var a = Singleton.getInstance('sven1');
+    //   var b = Singleton.getInstance('杨杨');
+    //   a.getName();
+    //   b.getName();
+    //   // var a = new Singleton('sven');
+    //   // // 万一别人再实例化？
+    //   // var b = new Singleton('杨杨');
+    //   // a.getName();
+    //   // b.getName();
+    //   // 登录 一个页面有多个需要登录的触发点，但是我们应该只实例化一次那个处理登录的对象，让它响应多出需求罢了。
+    //
+  </script>
+
+  <script>
+    //   class Singleton {
+    //     constructor(name) {
+    //       this.name = name;
+    //       this.instance = null;
+    //
+    //       getName() {
+    //         alert(this.name);
+    //       }
+    //       static getInstance(name) {
+    //         if (!this.instance) {
+    //           this.instance = new Singleton(name);
+    //         }
+    //         return this.instance;
+    //       }
+    //     }
+    //   }
+    //如何做到实例仅一次？ 将new 的任务交给一个static方法
+    // return this.instance?
+    //曾探 es6
+
+
+    // var Singleton = function(name) {
+    //   this.name = name;
+    // }
+    // Singleton.prototype.getName = function() {
+    //   alert(this.name);
+    // }
+    // // 高阶函数
+    // Singleton.getInstance = (function() {
+    //   var instance = null;
+    //   return function(name) { //Object 的一种 name 写在这里不是上面
+    //     if (!instance) {
+    //       instance = new Singleton(name);
+    //     }
+    //     return instance;
+    //   }
+    // })();
+    // //在外面引用getInstance可以用到return function
+    // var a = Singleton.getInstance('sven');
+    // var b = Singleton.getInstance('joly');
+    // alert(a === b);
+  </script>
+</body>
+
+</html>
