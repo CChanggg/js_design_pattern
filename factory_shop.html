@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var BicycleShop = function() {
+
+        }
+        BicycleShop.prototype = {
+                sellBicycle: function(model) {
+                    var bicycle = this.createBicycle(model);
+                    bicycle.assemble();
+                    bicycle.wash();
+                    return bicycle;
+                },
+                createBicycle: function() {
+                    throw new Error('不要在抽象类里执行方法');
+                }
+            }
+            // var shop = new BicycleShop();
+            // shop.sellBicycle();
+        var GiantBicycleShop = function() {
+            BicycleShop.apply(this, arguments);
+        }
+        GiantBicycleShop.prototype = BicycleShop;
+        GiantBicycleShop.prototype.createBicycle = function(modal) {
+            var bicycle;
+            switch (modul) {
+                case 'Giant hy':
+                    bicycle = new GiantHy();
+                    break;
+                case 'Giant yl':
+                    bicycle = new GiantYl();
+                    break;
+            }
+        }
+
+        function GiantYl() {
+
+        }
+        GiantYl.prototype = {
+                wash: function() {},
+                assemble: function() {},
+                ride: function() {},
+                repair: function() {}
+            }
+            //class非常耗内存 类也不好管理
+            //目标 每辆车都有上面的方法
+        Interface.ensureImplements(bicycle, Bicycle);
+        var Bicycle = new Interface('Bicycle', ['assemble', 'wash', 'eide', 'repair']);
+    </script>
+</body>
+
+</html>
